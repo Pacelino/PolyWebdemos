@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main_app'
+
+    'rest_framework',
+
+    'main_app',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'webdemos_bd',
         'USER': 'postgres',
-        'PASSWORD': '0',
+        'PASSWORD': '1401',
         'HOST': 'localhost',
         'PORT': '5432',
     }
