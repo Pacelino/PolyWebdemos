@@ -19,17 +19,20 @@ from django.urls import path, include
 
 from rest_framework import routers
 
-from main_app.views import LecturerViewSet, PersonViewSet, CourseViewSet, SlideViewSet, PresentationViewSet
+from main_app.views import LecturerViewSet, PersonViewSet, CourseViewSet, SlideViewSet, PresentationViewSet, \
+    presentation_view, presentation_detail_view
 
 router = routers.DefaultRouter()
 # api урлы в которых лежат данные модели
-router.register('lecturer', LecturerViewSet)
-router.register('person', PersonViewSet)
-router.register('course', CourseViewSet)
-router.register('presentation', PresentationViewSet)
-router.register('slide', SlideViewSet)
+router.register('api/lecturer', LecturerViewSet)
+router.register('api/person', PersonViewSet)
+router.register('api/course', CourseViewSet)
+router.register('api/presentation', PresentationViewSet)
+router.register('api/slide', SlideViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('presentation/', presentation_view),
+    path('presentations/<int:presentation_id>/', presentation_detail_view, name='presentation_detail'),
 ]

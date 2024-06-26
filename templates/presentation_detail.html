@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slides for {{ presentation.name }}</title>
+</head>
+<body>
+    <h1>Slides for {{ presentation.name }}</h1>
+    <ul>
+        {% for slide in slides %}
+            <li>
+                <h4>Slide {{ slide.number }}: {{ slide.header }}</h4>
+                <p>{{ slide.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
