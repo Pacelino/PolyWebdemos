@@ -5,6 +5,7 @@ from main_app.models import Lecturer, Person, Presentation, Course, Author, Slid
 from main_app.serializers import LecturerSerializer, PersonSerializer, CourseSerializer, SlideSerializer, \
     PresentationSerializer
 
+# main_app/views.py
 
 # Create your views here.
 
@@ -43,3 +44,5 @@ def presentation_detail_view(request, presentation_id):
     print(presentation.id)
     slides = presentation.slide_set.all()
     return render(request, 'presentation_detail.html', {"presentation": presentation, "slides": slides})
+def index(request):
+    return render(request, 'index.html')
