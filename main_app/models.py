@@ -40,9 +40,18 @@ class Course(models.Model):
         return f"{self.short_name}"
 
 
+class Section(models.Model):
+    name = models.CharField(max_length=150)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.name}"
+
+
 class Presentation(models.Model):  # topic
     name = models.CharField(max_length=150)
-    # slides = models.ManyToManyField(Slide)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    number = models.IntegerField()  # order in section
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     courses = models.ManyToManyField(Course)
 
