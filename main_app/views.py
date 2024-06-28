@@ -1,15 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 
-from SWF.approx_demo import approx_demo
-from main_app.forms import ApproxDemoForm
-from main_app.models import Lecturer, Person, Presentation, Course, Author, Slide, Presentation
+from main_app.models import Lecturer, Person, Presentation, Course, Author, Slide, Section
 from main_app.serializers import LecturerSerializer, PersonSerializer, CourseSerializer, SlideSerializer, \
     PresentationSerializer
+
 
 # main_app/views.py
 
 # Create your views here.
+
 
 class LecturerViewSet(ModelViewSet):
     queryset = Lecturer.objects.all()
@@ -39,6 +39,11 @@ class PresentationViewSet(ModelViewSet):
 def presentation_view(request):
     queryset = Presentation.objects.all()
     return render(request, 'presentation.html', {"presentation_objects": queryset})
+
+
+def section_view(request):
+    queryset = Section.objects.all()
+    return render(request, 'section.html', {"section_objects": queryset})
 
 
 def presentation_detail_view(request, presentation_id):

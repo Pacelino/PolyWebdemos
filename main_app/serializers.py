@@ -1,6 +1,12 @@
 from rest_framework.serializers import ModelSerializer
 
-from main_app.models import Lecturer, Person, Course, Slide, Presentation
+from main_app.models import Lecturer, Person, Course, Slide, Presentation, Section, Author
+
+
+class AuthorSerializer(ModelSerializer):
+    class Meta:
+        model = Author
+        fields = '__all__'
 
 
 class LecturerSerializer(ModelSerializer):
@@ -30,4 +36,10 @@ class SlideSerializer(ModelSerializer):
 class PresentationSerializer(ModelSerializer):
     class Meta:
         model = Presentation
+        fields = '__all__'
+
+
+class SectionSerializer(ModelSerializer):
+    class Meta:
+        model = Section
         fields = '__all__'
