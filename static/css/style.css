@@ -7,10 +7,27 @@ body {
 }
 
 header {
-    background-color: green;
+    background-color: white;
     color: white;
     padding: 1rem;
-    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    max-width: 15%;
+    height: auto;
+    margin-left:300px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 3rem;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 nav ul {
@@ -40,4 +57,10 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }

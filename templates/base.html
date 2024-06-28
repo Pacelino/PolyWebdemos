@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Default title{% endblock title %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/logo_main.svg' %}" alt="Logo">
+        <h1>PolyWebdemos</h1>
+    </header>
+
+    <nav>{% block nav %}
+        {% include "nav.html" %}
+    {% endblock nav %}</nav>
+    <div>{% block content %}{% endblock content %}</div>
+    <footer>{% block footer %}&copy; 2024 СПБПУ{% endblock footer %}</footer>
+</body>
+</html>
