@@ -16,25 +16,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 from rest_framework import routers
 
 from main_app.views import LecturerViewSet, PersonViewSet, CourseViewSet, SlideViewSet, PresentationViewSet, \
-    presentation_view, presentation_detail_view, index
+    presentation_view, presentation_detail_view, index, approx_demo_view
 
 router = routers.DefaultRouter()
 # api урлы в которых лежат данные модели
-router.register('api/lecturer', LecturerViewSet)
-router.register('api/person', PersonViewSet)
-router.register('api/course', CourseViewSet)
-router.register('api/presentation', PresentationViewSet)
-router.register('api/slide', SlideViewSet)
+router.register('lecturer', LecturerViewSet)
+router.register('person', PersonViewSet)
+router.register('course', CourseViewSet)
+router.register('presentation', PresentationViewSet)
+router.register('slide', SlideViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    ##path('', include(router.urls)),
     path('presentation/', presentation_view),
     path('presentations/<int:presentation_id>/', presentation_detail_view, name='presentation_detail'),
-    path('api/', include(router.urls)),
     path('', index, name='index'),
+    path('api/', include(router.urls)),
+    path('approx_demo/', approx_demo_view)
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
