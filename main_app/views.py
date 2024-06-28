@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 
+from SWF.approx_demo import approx_demo
+from main_app.forms import ApproxDemoForm
 from main_app.models import Lecturer, Person, Presentation, Course, Author, Slide, Section
 from main_app.serializers import LecturerSerializer, PersonSerializer, CourseSerializer, SlideSerializer, \
     PresentationSerializer
