@@ -1,1 +1,15 @@
-{#to be continued#}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% for obj in section_objects %}
+        <li><a href="{% url 'section_detail' obj.id %}">{{ obj.name }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

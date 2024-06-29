@@ -5,7 +5,7 @@ from SWF.approx_demo import approx_demo
 from main_app.forms import ApproxDemoForm
 from main_app.models import Lecturer, Person, Presentation, Course, Author, Slide, Section
 from main_app.serializers import LecturerSerializer, PersonSerializer, CourseSerializer, SlideSerializer, \
-    PresentationSerializer
+    PresentationSerializer, SectionSerializer
 
 
 # main_app/views.py
@@ -38,6 +38,11 @@ class PresentationViewSet(ModelViewSet):
     serializer_class = PresentationSerializer
 
 
+class SectionViewSet(ModelViewSet):
+    queryset = Section.objects.all()
+    serializer_class = SectionSerializer
+
+
 def presentation_view(request):
     queryset = Presentation.objects.all()
     return render(request, 'presentation.html', {"presentation_objects": queryset})
@@ -54,6 +59,12 @@ def presentation_detail_view(request, presentation_id):
     # достаю все слайды нужной презентации
     slides = presentation.slide_set.all()
     return render(request, 'presentation_detail.html', {"presentation": presentation, "slides": slides})
+
+
+def section_detail_view(request, section_id):
+    section = get_object_or_404(Section, pk=section_id)
+    presentations = section.presentation_set.all()
+    return render(request, 'section_detail.html', {"section": section, "presentations": presentations})
 
 
 def approx_demo_view(request):
