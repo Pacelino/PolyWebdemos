@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Default title{% endblock title %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-TJpf+Qvq9a8mho8Eto7jnX5AcbMQluhHq1T/AdB2ZBfPU6ht1j8gqxD+nUZgk4REqkiqIRKVJHgA2QaYI6lHDA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/logo_main_en.svg' %}" alt="Logo" style="max-width: 15%; height: auto; margin-right: 20px;">
+        <h1>PolyWebdemos</h1>
+    </header>
+
+    <nav>
+        {% block nav %}
+            {% include "nav.html" %}
+        {% endblock nav %}
+    </nav>
+
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer>
+        {% block footer %}&copy; 2024 СПБПУ{% endblock footer %}
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>

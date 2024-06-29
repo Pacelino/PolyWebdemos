@@ -1,32 +1,98 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyWebdemos</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header>
-        <h1>Добро пожаловать в PolyWebdemos</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/lecturer/">Lecturer</a></li>
-            <li><a href="/person/">Person</a></li>
-            <li><a href="/course/">Course</a></li>
-            <li><a href="/presentation/">Presentation</a></li>
-            <li><a href="/slide/">Slide</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h2>О PolyWebdemos</h2>
-        <p>Это демонстрационная площадка для проекта в СПБПУ.</p>
-    </main>
-    <footer>
-        <p>&copy; 2024 СПБПУ</p>
-    </footer>
-</body>
-</html>
+
+{% block title %}PolyWebdemos{% endblock title %}
+
+{% block content %}
+<section class="intro">
+    <h2>О PolyWebdemos</h2>
+    <p>Это демонстрационная площадка для проекта в СПБПУ.</p>
+</section>
+
+<section class="lectures">
+
+    <div class="lectures-card" onclick="toggleCourses('lectures1')">
+        <h1>Лекции</h1>
+    </div>
+
+    <div id="courses-lectures1" class="hidden courses">
+        <div class="course" data-course-id="course1">
+            <h4>Курс 1</h4>
+            <div class="lecture-lines" id="lecture-lines-course1">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div id="presentations-course1" class="hidden presentations">
+            <div class="presentation">Презентация 1</div>
+            <div class="presentation">Презентация 2</div>
+            <div class="presentation">Презентация 3</div>
+        </div>
+
+        <div class="course" data-course-id="course2">
+            <h4>Курс 2</h4>
+            <div class="lecture-lines" id="lecture-lines-course2">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div id="presentations-course2" class="hidden presentations">
+            <div class="presentation">Презентация 1</div>
+            <div class="presentation">Презентация 2</div>
+            <div class="presentation">Презентация 3</div>
+        </div>
+
+        <div class="course" data-course-id="course3">
+            <h4>Курс 3</h4>
+            <div class="lecture-lines" id="lecture-lines-course3">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div id="presentations-course3" class="hidden presentations">
+            <div class="presentation">Презентация 1</div>
+            <div class="presentation">Презентация 2</div>
+            <div class="presentation">Презентация 3</div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const lectureLines = document.querySelectorAll('.lecture-lines');
+        lectureLines.forEach(function (lines) {
+            lines.addEventListener('click', function () {
+                // Получаем родительский элемент .course для текущих линий
+                const course = lines.closest('.course');
+                if (course) {
+                    const courseId = course.dataset.courseId;
+                    togglePresentations(courseId);
+                }
+            });
+        });
+    });
+
+    function toggleCourses(lectureId) {
+        const courses = document.getElementById(`courses-${lectureId}`);
+        courses.classList.toggle('hidden');
+
+        const icon = document.querySelector(`.lecture-menu[data-lecture-id="${lectureId}"]`);
+        icon.classList.toggle('active');
+    }
+
+    function togglePresentations(courseId) {
+        const presentations = document.getElementById(`presentations-${courseId}`);
+        presentations.classList.toggle('hidden');
+    }
+
+    function toggleMenu() {
+        const lecturesSection = document.querySelector('.lectures');
+        lecturesSection.classList.toggle('show-menu');
+    }
+</script>
+{% endblock extra_js %}
