@@ -59,6 +59,57 @@
         </div>
     </div>
 </section>
+
+<section class="theses">
+
+    <div class="lectures-card" onclick="toggleCourses('theses1')">
+        <h1>Student Theses</h1>
+    </div>
+
+    <div id="courses-theses1" class="hidden courses">
+        <div class="course" data-course-id="course4">
+            <h4>Курс 1</h4>
+            <div class="lecture-lines" id="lecture-lines-course4">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div id="presentations-course4" class="hidden presentations">
+            <div class="presentation">Презентация 1</div>
+            <div class="presentation">Презентация 2</div>
+            <div class="presentation">Презентация 3</div>
+        </div>
+
+        <div class="course" data-course-id="course5">
+            <h4>Курс 2</h4>
+            <div class="lecture-lines" id="lecture-lines-course5">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div id="presentations-course5" class="hidden presentations">
+            <div class="presentation">Презентация 1</div>
+            <div class="presentation">Презентация 2</div>
+            <div class="presentation">Презентация 3</div>
+        </div>
+
+        <div class="course" data-course-id="course6">
+            <h4>Курс 3</h4>
+            <div class="lecture-lines" id="lecture-lines-course6">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div id="presentations-course6" class="hidden presentations">
+            <div class="presentation">Презентация 1</div>
+            <div class="presentation">Презентация 2</div>
+            <div class="presentation">Презентация 3</div>
+        </div>
+    </div>
+</section>
 {% endblock content %}
 
 {% block extra_js %}
@@ -67,7 +118,6 @@
         const lectureLines = document.querySelectorAll('.lecture-lines');
         lectureLines.forEach(function (lines) {
             lines.addEventListener('click', function () {
-                // Получаем родительский элемент .course для текущих линий
                 const course = lines.closest('.course');
                 if (course) {
                     const courseId = course.dataset.courseId;
@@ -80,19 +130,11 @@
     function toggleCourses(lectureId) {
         const courses = document.getElementById(`courses-${lectureId}`);
         courses.classList.toggle('hidden');
-
-        const icon = document.querySelector(`.lecture-menu[data-lecture-id="${lectureId}"]`);
-        icon.classList.toggle('active');
     }
 
     function togglePresentations(courseId) {
         const presentations = document.getElementById(`presentations-${courseId}`);
         presentations.classList.toggle('hidden');
-    }
-
-    function toggleMenu() {
-        const lecturesSection = document.querySelector('.lectures');
-        lecturesSection.classList.toggle('show-menu');
     }
 </script>
 {% endblock extra_js %}
