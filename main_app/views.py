@@ -1,9 +1,10 @@
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 
 from SWF.approx_demo import approx_demo
-from main_app.forms import ApproxDemoForm
-from main_app.models import Lecturer, Person, Presentation, Course, Author, Slide, Section
+from main_app.forms import ApproxDemoForm, AnotherDemoForm
+from main_app.models import Lecturer, Person, Presentation, Course, Author, Slide, Section, Demo
 from main_app.serializers import LecturerSerializer, PersonSerializer, CourseSerializer, SlideSerializer, \
     PresentationSerializer
 
@@ -38,6 +39,10 @@ class PresentationViewSet(ModelViewSet):
     serializer_class = PresentationSerializer
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
 def presentation_view(request):
     queryset = Presentation.objects.all()
     return render(request, 'presentation.html', {"presentation_objects": queryset})
@@ -53,7 +58,8 @@ def presentation_detail_view(request, presentation_id):
     presentation = get_object_or_404(Presentation, pk=presentation_id)
     # достаю все слайды нужной презентации
     slides = presentation.slide_set.all()
-    return render(request, 'presentation_detail.html', {"presentation": presentation, "slides": slides})
+    demonstrations = presentation.demo_set.all()
+    return render(request, 'presentation_detail.html', {"presentation": presentation, "slides": slides, "demonstrations": demonstrations})
 
 
 def approx_demo_view(request):
@@ -71,7 +77,6 @@ def approx_demo_view(request):
             show_hists = cleaned_data.get('show_hists', False)
             px1 = float(cleaned_data['show_px1'])
             num_points = int(cleaned_data['num_points'])
-
             image_path = approx_demo(
                 paramtype=paramtype,
                 varvalue=varvalue,
@@ -91,5 +96,35 @@ def approx_demo_view(request):
     return render(request, 'approx_demo.html', data)
 
 
-def index(request):
-    return render(request, 'index.html')
+def another_demo_view(request):
+    if request.method == 'POST':
+        form = AnotherDemoForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            data = {'form': form}
+            return render(request, 'another_demo_view.html', data)
+    else:
+        form = AnotherDemoForm()
+    data = {'form': form}
+    return render(request, 'another_demo.html', data)
+
+
+# функция - диспетчер. Позволяет по динамическому demonstration_id распределять демонстрации
+def demo_dispatcher_view(request, demonstration_id, presentation_id):
+    presentation = get_object_or_404(Presentation, pk=presentation_id)
+    demonstration = get_object_or_404(Demo, pk=presentation_id)
+
+    if demonstration not in presentation.demo_set.all():
+        raise Http404("Demo not found")
+# этот пример моей задумки. Пока в нем нет смысла.
+    if presentation.name == "Entropy":
+        if demonstration_id == 1:
+            return approx_demo_view(request)
+        elif demonstration_id == 2:
+            return another_demo_view(request)
+    else:
+        if demonstration_id == 1:
+            return another_demo_view(request)
+        elif demonstration_id == 2:
+            return another_demo_view(request)
+
