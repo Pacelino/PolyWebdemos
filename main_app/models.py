@@ -50,7 +50,7 @@ class Section(models.Model):
 
 class Presentation(models.Model):  # topic
     name = models.CharField(max_length=150)
-    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, blank=True, null=True)
     number = models.IntegerField()  # order in section
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     courses = models.ManyToManyField(Course)
@@ -69,3 +69,12 @@ class Slide(models.Model):
 
     def __str__(self):
         return f"{self.number} | {self.header[:10]}"
+
+
+class Demo(models.Model):
+    presentation = models.ForeignKey(Presentation, on_delete=models.CASCADE)
+    name = models.CharField(max_length=150)
+    # form = models.JSONField()  # Поле для хранения данных формы, может быть JSONField или другой подходящий тип
+
+    def __str__(self):
+        return self.name
