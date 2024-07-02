@@ -128,3 +128,11 @@ def demo_dispatcher_view(request, demonstration_id, presentation_id):
         elif demonstration_id == 2:
             return another_demo_view(request)
 
+def course_detail(request, course_id):
+    # Логика для получения данных о курсе по course_id
+    # course = get_course(course_id) - это может быть запрос к базе данных
+    context = {
+        'course_id': course_id,
+        # 'course': course - добавьте курс в контекст, если необходимо
+    }
+    return render(request, 'course_description.html', context)

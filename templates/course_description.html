@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Курс {{ course_id }}{% endblock title %}
+
+{% block content %}
+<section class="course-intro">
+    <h2>Курс {{ course_id }}</h2>
+</section>
+
+<section class="course-details">
+    <div class="course-content">
+        <h3>Описание курса</h3>
+        <p>Подробное описание содержания курса, методики преподавания и ожидаемых результатов.</p>
+
+        <h3>Содержание курса</h3>
+    </div>
+</section>
+
+<section class="course-lecturer">
+    <h3>Лектор курса</h3>
+    <div class="lecturer-info">
+        <img src="{% static 'images/logo_main.svg' %}" alt="Лектор">
+        <div class="lecturer-details">
+            <p><strong>Имя Фамилия</strong></p>
+            <p>Должность</p>
+            <p>Email: lecturer@example.com</p>
+            <p>Телефон: +7 (123) 456-7890</p>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+
