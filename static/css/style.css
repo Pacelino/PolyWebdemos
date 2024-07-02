@@ -221,3 +221,108 @@ img {
 .theses {
     margin-top: 2rem; /* Отступ сверху для секции "Student Theses" */
 }
+
+.course-description {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: #e8f5e9;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-description h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.course-description p {
+    font-size: 1.2rem;
+}
+
+.course-lectures {
+    margin: 2rem 0;
+}
+
+.course-lectures h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.course-lectures ul {
+    list-style: none;
+    padding: 0;
+}
+
+.course-lectures ul li {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-lectures ul li h4 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.course-lectures ul li p {
+    font-size: 1rem;
+}
+ .course-intro, .course-details, .course-lecturer {
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .course-intro {
+        background-color: #e8f5e9;
+        text-align: center;
+    }
+
+    .course-details {
+        display: flex;
+        justify-content: space-around;
+        background-color: #f9f9f9;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-content, .course-schedule {
+        width: 45%;
+    }
+
+    .course-lecturer {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .lecturer-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #d3d3d3;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .lecturer-info img {
+        max-width: 500px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    .lecturer-details {
+        text-align: center;
+    }
+
+    .lecturer-details p {
+        margin: 0.3rem 0;
+    }

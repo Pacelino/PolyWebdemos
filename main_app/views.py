@@ -56,6 +56,16 @@ def presentation_detail_view(request, presentation_id):
     return render(request, 'presentation_detail.html', {"presentation": presentation, "slides": slides})
 
 
+def course_detail(request, course_id):
+    # Логика для получения данных о курсе по course_id
+    # course = get_course(course_id) - это может быть запрос к базе данных
+    context = {
+        'course_id': course_id,
+        # 'course': course - добавьте курс в контекст, если необходимо
+    }
+    return render(request, 'course_description.html', context)
+
+
 def approx_demo_view(request):
     if request.method == 'POST':
         form = ApproxDemoForm(request.POST)

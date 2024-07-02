@@ -21,6 +21,7 @@ from django.conf import settings
 
 from rest_framework import routers
 
+from main_app import views
 from main_app.views import LecturerViewSet, PersonViewSet, CourseViewSet, SlideViewSet, PresentationViewSet, \
     presentation_view, presentation_detail_view, index, approx_demo_view
 
@@ -36,6 +37,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('presentation/', presentation_view),
     path('presentations/<int:presentation_id>/', presentation_detail_view, name='presentation_detail'),
+    path('course/<int:course_id>/', views.course_detail, name='course_detail'),
     path('', index, name='index'),
     path('api/', include(router.urls)),
     path('approx_demo/', approx_demo_view)
