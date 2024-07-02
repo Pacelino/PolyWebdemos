@@ -21,6 +21,7 @@ from django.conf import settings
 
 from rest_framework import routers
 
+from main_app import views
 from main_app.views import LecturerViewSet, PersonViewSet, CourseViewSet, SlideViewSet, PresentationViewSet, \
     presentation_view, presentation_detail_view, index, approx_demo_view, demo_dispatcher_view
 
@@ -41,6 +42,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('approx_demo/', approx_demo_view, name='approx_demo'),
     path('course/<int:course_id>/', views.course_detail, name='course_detail')
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
