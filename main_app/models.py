@@ -51,9 +51,7 @@ class Section(models.Model):
 
 class Presentation(models.Model):  # topic
     name = models.CharField(max_length=150)
- main
     section = models.ForeignKey(Section, on_delete=models.CASCADE, blank=True, null=True)
- main
     number = models.IntegerField()  # order in section
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING, blank=True)
     courses = models.ManyToManyField(Course, blank=True)
