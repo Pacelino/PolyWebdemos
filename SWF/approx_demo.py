@@ -20,7 +20,7 @@ def approx_demo(
         show_hists: bool,
         px1: float,
         num_points: int,
-        filename="output_approx.png"
+        image_name='output_approx1.png'
 ) -> str:
     max_xi = 4
     matplotlib.use('Agg')
@@ -129,9 +129,8 @@ def approx_demo(
     ax.grid(True)
 
     # Create an image file. This png image is displayed on the webpage. Its size must be 640x480.
-    image_name = 'output_approx1.png'
+
     image_path = os.path.join(settings.MEDIA_ROOT, image_name)
-    # output_path = f'media/{filename}'
     plt.savefig(image_path)
     plt.close(fig)
     return os.path.join(settings.MEDIA_URL, image_name)

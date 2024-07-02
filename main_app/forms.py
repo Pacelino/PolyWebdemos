@@ -19,3 +19,8 @@ class ApproxDemoForm(forms.Form):
     show_hists = forms.BooleanField(required=False)
     show_px1 = forms.DecimalField(max_digits=10, decimal_places=2)
     num_points = forms.IntegerField()
+
+
+class AnotherDemoForm(forms.Form):
+    another_param = forms.CharField(max_length=100)
+    another_value = forms.IntegerField()
