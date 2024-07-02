@@ -4,31 +4,33 @@
 {% block title %}Курс {{ course_id }}{% endblock title %}
 
 {% block content %}
-<section class="course-intro">
-    <h2>Курс {{ course_id }}</h2>
-</section>
+    <section class="course-intro">
+        <h2>Курс №{{ course.id }}. {{ course.full_name }} ({{ course.short_name }})</h2>
+        <p>{{ course.short_description }}</p>
+    </section>
 
-<section class="course-details">
-    <div class="course-content">
-        <h3>Описание курса</h3>
-        <p>Подробное описание содержания курса, методики преподавания и ожидаемых результатов.</p>
-
-        <h3>Содержание курса</h3>
-    </div>
-</section>
-
-<section class="course-lecturer">
-    <h3>Лектор курса</h3>
-    <div class="lecturer-info">
-        <img src="{% static 'images/logo_main.svg' %}" alt="Лектор">
-        <div class="lecturer-details">
-            <p><strong>Имя Фамилия</strong></p>
-            <p>Должность</p>
-            <p>Email: lecturer@example.com</p>
-            <p>Телефон: +7 (123) 456-7890</p>
+    <section class="course-details">
+        <div class="course-content">
+            <h3>Описание курса</h3>
+            <p>{{ course.full_description }}</p>
+            <h3>Содержание курса</h3>
         </div>
-    </div>
-</section>
+    </section>
+
+    <section class="course-lecturer">
+        <h3>Лектор курса</h3>
+        <div class="lecturer-info">
+            <img src="{{ lecturer.photo.url }}" alt="Фото лектора">
+            <div class="lecturer-details">
+                <p><strong>{{ lecturer.person.name }}</strong></p>
+                <p>Учёная степень: {{ lecturer.degree }}</p>
+                <p>Должность: {{ lecturer.position }}</p>
+                <p>Email: <a href="mailto:{{ lecturer.person.email }}">{{ lecturer.person.email }}</a></p>
+                <p>Телефон: <a href="tel:{{ lecturer.phone }}">{{ lecturer.phone }}</a></p>
+                <a href="{% url 'lecturer_detail' lecturer.id %}">Профиль лектора</a>
+            </div>
+        </div>
+    </section>
 {% endblock content %}
 
 

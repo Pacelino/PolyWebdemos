@@ -43,9 +43,9 @@ class SectionViewSet(ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
+
 def index(request):
     return render(request, 'index.html')
-
 
 
 def presentation_view(request):
@@ -64,13 +64,24 @@ def presentation_detail_view(request, presentation_id):
     # достаю все слайды нужной презентации
     slides = presentation.slide_set.all()
     demonstrations = presentation.demo_set.all()
-    return render(request, 'presentation_detail.html', {"presentation": presentation, "slides": slides, "demonstrations": demonstrations})
+    return render(request, 'presentation_detail.html',
+                  {"presentation": presentation, "slides": slides, "demonstrations": demonstrations})
 
 
 def section_detail_view(request, section_id):
     section = get_object_or_404(Section, pk=section_id)
     presentations = section.presentation_set.all()
     return render(request, 'section_detail.html', {"section": section, "presentations": presentations})
+
+
+def lecturer_view(request):
+    queryset = Lecturer.objects.all()
+    return render(request, 'lecturer.html', {"lecturer_objects": queryset})
+
+
+def lecturer_detail_view(request, lecturer_id):
+    lecturer = get_object_or_404(Lecturer, pk=lecturer_id)
+    return render(request, 'lecturer_detail.html', {"lecturer": lecturer})
 
 
 def approx_demo_view(request):
@@ -127,7 +138,7 @@ def demo_dispatcher_view(request, demonstration_id, presentation_id):
 
     if demonstration not in presentation.demo_set.all():
         raise Http404("Demo not found")
-# этот пример моей задумки. Пока в нем нет смысла.
+    # этот пример моей задумки. Пока в нем нет смысла.
     if presentation.name == "Entropy":
         if demonstration_id == 1:
             return approx_demo_view(request)
@@ -139,11 +150,11 @@ def demo_dispatcher_view(request, demonstration_id, presentation_id):
         elif demonstration_id == 2:
             return another_demo_view(request)
 
-def course_detail(request, course_id):
-    # Логика для получения данных о курсе по course_id
-    # course = get_course(course_id) - это может быть запрос к базе данных
+
+def course_detail_view(request, course_id):
+    course = get_object_or_404(Course, pk=course_id)
     context = {
-        'course_id': course_id,
-        # 'course': course - добавьте курс в контекст, если необходимо
+        'course': course,
+        'lecturer': course.lecturer
     }
     return render(request, 'course_description.html', context)
