@@ -38,14 +38,14 @@ class PresentationViewSet(ModelViewSet):
     queryset = Presentation.objects.all()
     serializer_class = PresentationSerializer
 
- main
+
 class SectionViewSet(ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
 def index(request):
     return render(request, 'index.html')
- main
+
 
 
 def presentation_view(request):
