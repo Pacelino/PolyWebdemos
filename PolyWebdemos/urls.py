@@ -37,12 +37,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('presentation/', presentation_view),
     path('presentations/<int:presentation_id>/', presentation_detail_view, name='presentation_detail'),
-main
     path('section/', section_view),
     path('sections/<int:section_id>/', section_detail_view, name='section_detail'),
-
     path('presentations/<int:presentation_id>/<int:demonstration_id>/', demo_dispatcher_view, name='demo_dispatcher'),
- main
     path('', index, name='index'),
     path('api/', include(router.urls)),
     path('approx_demo/', approx_demo_view, name='approx_demo'),

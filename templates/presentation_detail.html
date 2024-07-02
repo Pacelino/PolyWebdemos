@@ -18,14 +18,10 @@
     <ul>
         {% for demonstration in demonstrations %}
             <li>
-{#                <a href="{% url 'presentation_detail' obj.id %}">{{ obj.name }}</a>#}
-              <a href="{% url 'demo_dispatcher' presentation.id forloop.counter %}">{{ demonstration.name }}</a>  
+              <a href="{% url 'demo_dispatcher' presentation.id forloop.counter %}">demo: {{ demonstration.name }}</a>  
                 <p>{{ slide.content }}</p>
-                {{ demonstration.name }} 
-            
             </li>
         {% endfor %}
-        {{ presentation.id }}
     </ul>
 </body>
 </html>
