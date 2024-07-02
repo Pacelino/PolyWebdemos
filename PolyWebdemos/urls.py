@@ -23,9 +23,7 @@ from rest_framework import routers
 
 from main_app import views
 from main_app.views import LecturerViewSet, PersonViewSet, CourseViewSet, SlideViewSet, PresentationViewSet, \
- main
-    presentation_view, presentation_detail_view, index, approx_demo_view, demo_dispatcher_view, section_view, section_detail_view
- main
+presentation_view, presentation_detail_view, index, approx_demo_view, demo_dispatcher_view, section_view, section_detail_view
 
 router = routers.DefaultRouter()
 # api урлы в которых лежат данные модели
