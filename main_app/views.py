@@ -45,7 +45,13 @@ class SectionViewSet(ModelViewSet):
 
 
 def index(request):
-    return render(request, 'index.html')
+    sections_set = Section.objects.all()
+    courses_set = Course.objects.all()
+    momo_bird = {section: {course: [] for course in courses_set} for section in sections_set}
+    for section in momo_bird:
+        for course in momo_bird[section]:
+            momo_bird[section][course] = Presentation.objects.filter(courses__in=[course], section=section)
+    return render(request, 'index.html', {"sections": momo_bird})
 
 
 def presentation_view(request):
