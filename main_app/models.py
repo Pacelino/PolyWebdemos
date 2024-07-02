@@ -4,26 +4,27 @@ from django.db.models import JSONField
 
 class Person(models.Model):
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)  # change to PhoneNumberField from \
-    # https://github.com/stefanfoulis/django-phonenumber-field (?)
-    email = models.EmailField()
-    profile_page = models.URLField()
+    email = models.EmailField(blank=True)
 
     def __str__(self):
-        return f"{self.name} | {self.phone}"
+        return f"{self.name}"
 
 
 class Lecturer(models.Model):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE)
-    degree = models.CharField(max_length=50)
-    position = models.CharField(max_length=50)
+    person = models.OneToOneField(Person, on_delete=models.DO_NOTHING)
+    degree = models.CharField(max_length=50, blank=True)
+    position = models.CharField(max_length=50, blank=True)
+    phone = models.CharField(max_length=15, blank=True)  # change to PhoneNumberField from \
+    # https://github.com/stefanfoulis/django-phonenumber-field (?)
+    photo = models.ImageField(upload_to='photos', blank=True)
+    bio = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.person.name} | {self.degree}"
 
 
 class Author(models.Model):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE)
+    person = models.OneToOneField(Person, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return f"{self.person}"
@@ -32,9 +33,9 @@ class Author(models.Model):
 class Course(models.Model):
     full_name = models.CharField(max_length=150)
     short_name = models.CharField(max_length=50)
-    short_description = models.CharField(max_length=150)
-    full_description = models.TextField()
-    lecturer = models.ForeignKey(Lecturer, on_delete=models.CASCADE)
+    short_description = models.CharField(max_length=150, blank=True)
+    full_description = models.TextField(blank=True)
+    lecturer = models.ForeignKey(Lecturer, on_delete=models.DO_NOTHING, blank=True)
 
     def __str__(self):
         return f"{self.short_name}"
@@ -42,7 +43,7 @@ class Course(models.Model):
 
 class Section(models.Model):
     name = models.CharField(max_length=150)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -50,10 +51,12 @@ class Section(models.Model):
 
 class Presentation(models.Model):  # topic
     name = models.CharField(max_length=150)
+ main
     section = models.ForeignKey(Section, on_delete=models.CASCADE, blank=True, null=True)
+ main
     number = models.IntegerField()  # order in section
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    courses = models.ManyToManyField(Course)
+    author = models.ForeignKey(Author, on_delete=models.DO_NOTHING, blank=True)
+    courses = models.ManyToManyField(Course, blank=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -61,10 +64,10 @@ class Presentation(models.Model):  # topic
 
 class Slide(models.Model):
     number = models.IntegerField()
-    header = models.CharField(max_length=150)
+    header = models.CharField(max_length=150, blank=True)
     content_type = models.CharField(max_length=4)  # text / demo
     content = models.TextField()
-    presentation = models.ForeignKey(Presentation, on_delete=models.CASCADE, blank=True, null=True)
+    presentation = models.ForeignKey(Presentation, on_delete=models.DO_NOTHING, blank=True, null=True)
     extra_params = JSONField(blank=True, null=True)  # Для хранения параметров, передаваемых matlab функции
 
     def __str__(self):

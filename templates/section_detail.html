@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slides for {{ presentation.name }}</title>
+</head>
+<body>
+<h1>Section: {{ section.name }}</h1>
+<ul>
+    {% for obj in presentations %}
+        <li><a href="{% url 'presentation_detail' obj.id %}">{{ obj.name }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
