@@ -40,6 +40,3 @@ class CapacityDistance_G9701Form(forms.Form):
     distance_stop = forms.DecimalField(label="Конечная точка", max_digits=5, decimal_places=2,  max_value=6.0, widget=forms.TextInput)
 
 
-class AnotherDemoForm(forms.Form):
-    another_param = forms.CharField(max_length=100)
-    another_value = forms.IntegerField()

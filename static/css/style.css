@@ -344,11 +344,8 @@ img {
         margin-right: 100px; /* уменьшение промежутка между графиком и формой */
     }
 
-    /* кнопка */
-/*<!-- HTML !-->*/
-/*<button class="button-3" role="button">Button 3</button>*/
+    /* извиняюсь, но очень хотел зеленую кнопку*/
 
-/* CSS */
 .button-3 {
   appearance: none;
   background-color: #2ea44f;
