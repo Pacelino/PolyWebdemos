@@ -36,8 +36,8 @@ class CapacityDistance_G9701Form(forms.Form):
     checkADSL2 = forms.BooleanField(label="ADSL+ 2.2 MHz", required=False)
     checkVDSL1 = forms.BooleanField(label="VDSL2 17.6 MHz", required=False)
     checkVDSL2 = forms.BooleanField(label="VDSL2 30 MHz", required=False)
-    distance_start = forms.DecimalField(label="Начальная точка отчета",max_digits=5, decimal_places=2)
-    distance_stop = forms.DecimalField(label="Конечная точка", max_digits=5, decimal_places=2,  max_value=6.0)
+    distance_start = forms.DecimalField(label="Начальная точка отчета", max_digits=5, decimal_places=2, min_value=0, widget=forms.TextInput)
+    distance_stop = forms.DecimalField(label="Конечная точка", max_digits=5, decimal_places=2,  max_value=6.0, widget=forms.TextInput)
 
 
 class AnotherDemoForm(forms.Form):

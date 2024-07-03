@@ -126,7 +126,8 @@ def approx_demo_view(request):
 
 def CapacityDistance_G9701_view(request):
     if request.method == 'POST':
-        form = CapacityDistance_G9701Form(request.POST, request)
+        form = CapacityDistance_G9701Form(request.POST)
+        print("1, 2, 3, 5")
         if form.is_valid():
             form_cleaned_data = form.cleaned_data
             idx = int(form_cleaned_data['idx'])

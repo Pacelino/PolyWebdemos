@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Digital Subscriber Line (DSL)</title>
-</head>
-<body>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
-{% if image_path %}
-    <image src={{ image_path }}></image>
-{% endif %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Digital Subscriber Line (DSL) {% endblock %}
+    <!-- existing head content -->
+{% block content %}
+    
+
+<div class="container">
+    <div class="graph-container">
+        {% if image_path %}
+            <img src="{{ image_path }}" alt="Graph Image">
+        {% endif %}
+    </div>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button-3" role="button">Показать</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

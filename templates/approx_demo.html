@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Demo for {{ slide.header }}</title>
-</head>
-<body>
-    <h1>{{ slide.header }}</h1>
+{% extends 'base.html' %}
+{% load static %}
+    {% block title %} {{ slide.header }} {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="graph-container">
+            {% if image_path %}
+                <img src="{{ image_path }}" alt="Graph Image">
+            {% endif %}
+        </div>
+    <div class="form-container">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit" class="button-3" role="button">Показать</button>
     </form>
-    {% if image_path %}
-        <h2>Resulting Graph:</h2>
-        <img src="{{ image_path }}" alt="Graph">
-    {% endif %}
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}

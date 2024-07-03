@@ -1,10 +1,8 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Slides for {{ presentation.name }}</title>
-</head>
+
+{% block title %} Slides for {{ presentation.name }} {% endblock %}
+{% block content %}
 <body>
     <h1>Slides for {{ presentation.name }}</h1>
     <ul>
@@ -24,4 +22,4 @@
         {% endfor %}
     </ul>
 </body>
-</html>
+{% endblock %}
