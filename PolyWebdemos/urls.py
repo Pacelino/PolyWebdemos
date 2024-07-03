@@ -27,23 +27,33 @@ presentation_view, presentation_detail_view, index, approx_demo_view, demo_dispa
 
 router = routers.DefaultRouter()
 # api урлы в которых лежат данные модели
-router.register('lecturer', LecturerViewSet)
-router.register('person', PersonViewSet)
-router.register('course', CourseViewSet)
-router.register('presentation', PresentationViewSet)
-router.register('slide', SlideViewSet)
+router.register('lecturer', views.LecturerViewSet)
+router.register('person', views.PersonViewSet)
+router.register('course', views.CourseViewSet)
+router.register('presentation', views.PresentationViewSet)
+router.register('slide', views.SlideViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('presentation/', presentation_view),
-    path('presentations/<int:presentation_id>/', presentation_detail_view, name='presentation_detail'),
-    path('section/', section_view),
-    path('sections/<int:section_id>/', section_detail_view, name='section_detail'),
-    path('presentations/<int:presentation_id>/<int:demonstration_id>/', demo_dispatcher_view, name='demo_dispatcher'),
-    path('', index, name='index'),
+
+
+    path('presentation/', views.presentation_view),
+    path('presentations/<int:presentation_id>/', views.presentation_detail_view, name='presentation_detail'),
+    path('presentations/<int:presentation_id>/<int:demonstration_id>/', views.demo_dispatcher_view,
+         name='demo_dispatcher'),
+
+    path('section/', views.section_view),
+    path('sections/<int:section_id>/', views.section_detail_view, name='section_detail'),
+
+    path('course/<int:course_id>/', views.course_detail_view, name='course_detail'),
+
+    path('lecturer/', views.lecturer_view),
+    path('lecturers/<int:lecturer_id>', views.lecturer_detail_view, name='lecturer_detail'),
+
+    path('', views.index, name='index'),
+
     path('api/', include(router.urls)),
-    path('approx_demo/', approx_demo_view, name='approx_demo'),
-    path('course/<int:course_id>/', views.course_detail, name='course_detail')
+    path('approx_demo/', views.approx_demo_view, name='approx_demo'),
 
 ]
 

@@ -4,137 +4,64 @@
 {% block title %}PolyWebdemos{% endblock title %}
 
 {% block content %}
-<section class="intro">
-    <h2>О PolyWebdemos</h2>
-    <p>Это демонстрационная площадка для проекта в СПБПУ.</p>
-</section>
+    <section class="intro">
+        <h2>О PolyWebdemos</h2>
+        <p>Это демонстрационная площадка для проекта в СПБПУ.</p>
+    </section>
 
-<section class="lectures">
-
-    <div class="lectures-card" onclick="toggleCourses('lectures1')">
-        <h1>Лекции</h1>
-    </div>
-
-    <div id="courses-lectures1" class="hidden courses">
-        <div class="course" data-course-id="course1">
-            <h4><a href="{% url 'course_detail' course_id=1 %}">Курс 1</a></h4>
-            <div class="lecture-lines" id="lecture-lines-course1">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+    {% for section, courses in sections.items %}
+        <section class="section">
+            <div class="section-card" onclick="toggleCourses('{{ section.id }}')">
+                <h1>{{ section.name }}</h1>
             </div>
-        </div>
-        <div id="presentations-course1" class="hidden presentations">
-            <div class="presentation">Презентация 1</div>
-            <div class="presentation">Презентация 2</div>
-            <div class="presentation">Презентация 3</div>
-        </div>
-
-        <div class="course" data-course-id="course2">
-            <h4><a href="{% url 'course_detail' course_id=2 %}">Курс 2</a></h4>
-            <div class="lecture-lines" id="lecture-lines-course2">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+            <div id="courses-{{ section.id }}" class="hidden courses">
+                {% for course, presentations in courses.items %}
+                    <div class="course" data-course-id="{{ section.id }}-{{ course.id }}">
+                        <h4><a href="{% url 'course_detail' course.id %}">Курс "{{ course.full_name }}"</a></h4>
+                        <div class="section-lines" id="section-lines-{{ section.name }}1">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                    <div id="presentations-{{ section.id }}-{{ course.id }}" class="hidden presentations">
+                        {% for presentation in presentations %}
+                            <div class="presentation">
+                                <a href="{% url 'presentation_detail' presentation.id %}">
+                                    {{ presentation.number }}. {{ presentation.name }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
-        </div>
-        <div id="presentations-course2" class="hidden presentations">
-            <div class="presentation">Презентация 1</div>
-            <div class="presentation">Презентация 2</div>
-            <div class="presentation">Презентация 3</div>
-        </div>
-
-        <div class="course" data-course-id="course3">
-            <h4><a href="{% url 'course_detail' course_id=3 %}">Курс 3</a></h4>
-            <div class="lecture-lines" id="lecture-lines-course3">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </div>
-        <div id="presentations-course3" class="hidden presentations">
-            <div class="presentation">Презентация 1</div>
-            <div class="presentation">Презентация 2</div>
-            <div class="presentation">Презентация 3</div>
-        </div>
-    </div>
-</section>
-
-<section class="theses">
-
-    <div class="lectures-card" onclick="toggleCourses('theses1')">
-        <h1>Student Theses</h1>
-    </div>
-
-    <div id="courses-theses1" class="hidden courses">
-        <div class="course" data-course-id="course4">
-            <h4><a href="{% url 'course_detail' course_id=4 %}">Курс 1</a></h4>
-            <div class="lecture-lines" id="lecture-lines-course4">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </div>
-        <div id="presentations-course4" class="hidden presentations">
-            <div class="presentation">Презентация 1</div>
-            <div class="presentation">Презентация 2</div>
-            <div class="presentation">Презентация 3</div>
-        </div>
-
-        <div class="course" data-course-id="course5">
-            <h4><a href="{% url 'course_detail' course_id=5 %}">Курс 2</a></h4>
-            <div class="lecture-lines" id="lecture-lines-course5">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </div>
-        <div id="presentations-course5" class="hidden presentations">
-            <div class="presentation">Презентация 1</div>
-            <div class="presentation">Презентация 2</div>
-            <div class="presentation">Презентация 3</div>
-        </div>
-
-        <div class="course" data-course-id="course6">
-            <h4><a href="{% url 'course_detail' course_id=6 %}">Курс 3</a></h4>
-            <div class="lecture-lines" id="lecture-lines-course6">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </div>
-        <div id="presentations-course6" class="hidden presentations">
-            <div class="presentation">Презентация 1</div>
-            <div class="presentation">Презентация 2</div>
-            <div class="presentation">Презентация 3</div>
-        </div>
-    </div>
-</section>
+        </section>
+    {% endfor %}
 {% endblock content %}
 
 {% block extra_js %}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const lectureLines = document.querySelectorAll('.lecture-lines');
-        lectureLines.forEach(function (lines) {
-            lines.addEventListener('click', function () {
-                const course = lines.closest('.course');
-                if (course) {
-                    const courseId = course.dataset.courseId;
-                    togglePresentations(courseId);
-                }
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sectionLines = document.querySelectorAll('.section-lines');
+            sectionLines.forEach(function (lines) {
+                lines.addEventListener('click', function () {
+                    const course = lines.closest('.course');
+                    if (course) {
+                        const courseId = course.dataset.courseId;
+                        togglePresentations(courseId);
+                    }
+                });
             });
         });
-    });
 
-    function toggleCourses(lectureId) {
-        const courses = document.getElementById(`courses-${lectureId}`);
-        courses.classList.toggle('hidden');
-    }
+        function toggleCourses(sectionId) {
+            const courses = document.getElementById(`courses-${sectionId}`);
+            courses.classList.toggle('hidden');
+        }
 
-    function togglePresentations(courseId) {
-        const presentations = document.getElementById(`presentations-${courseId}`);
-        presentations.classList.toggle('hidden');
-    }
-</script>
+        function togglePresentations(courseId) {
+            const presentations = document.getElementById(`presentations-${courseId}`);
+            presentations.classList.toggle('hidden');
+        }
+    </script>
 {% endblock extra_js %}

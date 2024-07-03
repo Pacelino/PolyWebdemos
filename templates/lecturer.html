@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Список лекторов{% endblock title %}
+
+{% block content %}
+    <ul>
+        {% for obj in lecturer_objects %}
+            <li><a href="{% url 'lecturer_detail' obj.id %}">{{ obj.person.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

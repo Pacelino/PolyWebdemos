@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ lecturer.person.name }}{% endblock title %}
+
+
+{# ~~~~~~~ ДОРАБОТАТЬ, ПЕРЕПИСАТЬ СТИЛИ В CSS ~~~~~~~ #}
+
+{% block content %}
+    <div style="display: flex; flex-direction: row">
+        <div style="margin-right: 20px; max-height: 300px; max-width: 300px">
+            <img src="{{ lecturer.photo.url }}" alt="Фото профиля"
+                 style="width: 100%; height: 100%; display: block; object-fit: cover; object-position: center;">
+        </div>
+        <div>
+            <p>{{ lecturer.degree }}</p>
+            <strong>{{ lecturer.person.name }}</strong>
+            <p>{{ lecturer.position }}</p>
+            <br>
+            <p>Телефон: <a href="tel:{{ lecturer.phone }}">{{ lecturer.phone }}</a></p>
+            <p>Email: <a href="mailto:{{ lecturer.person.email }}">{{ lecturer.person.email }}</a></p>
+        </div>
+    </div>
+    <h2>Биография</h2>
+    <p style="white-space: pre-wrap">{{ lecturer.bio }}</p>
+{% endblock content %}
