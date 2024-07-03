@@ -18,7 +18,7 @@ class LecturerSerializer(ModelSerializer):
 class PersonSerializer(ModelSerializer):
     class Meta:
         model = Person
-        fields = ['id', 'name', 'phone', 'email']
+        fields = ['id', 'name', 'email']
 
 
 class CourseSerializer(ModelSerializer):
