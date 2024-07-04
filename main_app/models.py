@@ -14,8 +14,7 @@ class Lecturer(models.Model):
     person = models.OneToOneField(Person, on_delete=models.DO_NOTHING)
     degree = models.CharField(max_length=50, blank=True)
     position = models.CharField(max_length=50, blank=True)
-    phone = models.CharField(max_length=15, blank=True)  # change to PhoneNumberField from \
-    # https://github.com/stefanfoulis/django-phonenumber-field (?)
+    phone = models.CharField(max_length=15, blank=True)
     photo = models.ImageField(upload_to='photos', blank=True)
     bio = models.TextField(blank=True)
 
@@ -49,7 +48,7 @@ class Section(models.Model):
         return f"{self.name}"
 
 
-class Presentation(models.Model):  # topic
+class Presentation(models.Model):
     name = models.CharField(max_length=150)
     section = models.ForeignKey(Section, on_delete=models.CASCADE, blank=True, null=True)
     number = models.IntegerField()  # order in section
@@ -63,10 +62,8 @@ class Presentation(models.Model):  # topic
 class Slide(models.Model):
     number = models.IntegerField()
     header = models.CharField(max_length=150, blank=True)
-    content_type = models.CharField(max_length=4)  # text / demo
     content = models.TextField()
     presentation = models.ForeignKey(Presentation, on_delete=models.DO_NOTHING, blank=True, null=True)
-    extra_params = JSONField(blank=True, null=True)  # Для хранения параметров, передаваемых matlab функции
 
     def __str__(self):
         return f"{self.number} | {self.header[:10]}"
