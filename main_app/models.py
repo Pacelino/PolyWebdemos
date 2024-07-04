@@ -66,13 +66,12 @@ class Slide(models.Model):
     presentation = models.ForeignKey(Presentation, on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.number} | {self.header[:10]}"
+        return f"{self.header}"
 
 
 class Demo(models.Model):
     presentation = models.ForeignKey(Presentation, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
-    # form = models.JSONField()  # Поле для хранения данных формы, может быть JSONField или другой подходящий тип
 
     def __str__(self):
         return self.name
