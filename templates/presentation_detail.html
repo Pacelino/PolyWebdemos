@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %} Slides for {{ presentation.name }} {% endblock %}
+{% block title %} {{ presentation.name }} {% endblock %}
 {% block content %}
+    
 <body>
-    <h1>Slides for {{ presentation.name }}</h1>
+    <h1>{{ presentation.name }}</h1>
     <ul>
         {% for slide in slides %}
             <li>
