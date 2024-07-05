@@ -23,7 +23,8 @@ from rest_framework import routers
 
 from main_app import views
 from main_app.views import LecturerViewSet, PersonViewSet, CourseViewSet, SlideViewSet, PresentationViewSet, \
-presentation_view, presentation_detail_view, index, approx_demo_view, demo_dispatcher_view, section_view, section_detail_view
+    presentation_view, presentation_detail_view, index, approx_demo_view, demo_dispatcher_view, section_view, \
+    section_detail_view, PresentationSearchResultView
 
 router = routers.DefaultRouter()
 # api урлы в которых лежат данные модели
@@ -41,6 +42,7 @@ urlpatterns = [
     path('presentations/<int:presentation_id>/', views.presentation_detail_view, name='presentation_detail'),
     path('presentations/<int:presentation_id>/<int:demonstration_id>/', views.demo_dispatcher_view,
          name='demo_dispatcher'),
+    path('presentation/search/', PresentationSearchResultView.as_view(), name='search'),
 
     path('section/', views.section_view),
     path('sections/<int:section_id>/', views.section_detail_view, name='section_detail'),

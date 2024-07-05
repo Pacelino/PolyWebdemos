@@ -1,6 +1,9 @@
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 from rest_framework.viewsets import ModelViewSet
+from django.db.models import Q
 
 from SWF.CapacityDistance_G9701_fun import CapacityDistance_fun
 from SWF.approx_demo import approx_demo
@@ -40,9 +43,42 @@ class PresentationViewSet(ModelViewSet):
     serializer_class = PresentationSerializer
 
 
+class PresentationSearchResultView(ListView):
+    """View для поиска по презентациям"""
+    model = Presentation
+    paginate_by = 5
+    template_name = 'presentation_search.html'
+    #
+    # queryset = Presentation.objects.filter(
+    #     Q(author__presentation__name=1)
+    # )
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            query = ' '.join(query.split())
+
+        object_list = Presentation.objects.filter(
+            Q(name__icontains=query)
+        )
+        return object_list
+    # def get_queryset(self):
+    #     """Поиск презентаций по полнотекстному запросу"""
+    #     query = self.request.GET.get('q') # поиск будет по инпуту под именем q
+    #     search_vector = SearchVector('name', weight='C') + SearchVector('courses', weight='B') + SearchVector('author', weight='A') # дает поиск по нескольким полям и выдает веса
+    #     search_query = SearchQuery(query)  # ищет по запросу пользовтеля
+    #     return (self.model.objects.annotate(rank=SearchRank(search_vector, search_query)).filter(rank__gte=0.3)) # SearchRank сравнивает запрос пользователя и вектор
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['name'] = self.request.GET.get('q')
+    #     print(context)
+    #     return context
+
+
 class SectionViewSet(ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
+
 
 def index(request):
     sections_set = Section.objects.all()

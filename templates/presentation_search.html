@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block title %} Результат поиска {% endblock %}
+
+{% block content %}
+<body>
+        <ul>
+            {% for presentation in object_list %}
+                <a href="{%  url 'presentation_detail' presentation.id %}">presentation.name</a>
+            {% endfor %}
+        </ul>
+</body>
+{% endblock %}
