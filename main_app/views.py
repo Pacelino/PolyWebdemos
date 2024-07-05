@@ -46,12 +46,8 @@ class PresentationViewSet(ModelViewSet):
 class PresentationSearchResultView(ListView):
     """View для поиска по презентациям"""
     model = Presentation
-    paginate_by = 5
     template_name = 'presentation_search.html'
-    #
-    # queryset = Presentation.objects.filter(
-    #     Q(author__presentation__name=1)
-    # )
+
     def get_queryset(self):
         query = self.request.GET.get('q')
         if query:
@@ -62,18 +58,8 @@ class PresentationSearchResultView(ListView):
             Q(author__person__name__icontains=query)
         )
         return object_list
-    # def get_queryset(self):
-    #     """Поиск презентаций по полнотекстному запросу"""
-    #     query = self.request.GET.get('q') # поиск будет по инпуту под именем q
-    #     search_vector = SearchVector('name', weight='C') + SearchVector('courses', weight='B') + SearchVector('author', weight='A') # дает поиск по нескольким полям и выдает веса
-    #     search_query = SearchQuery(query)  # ищет по запросу пользовтеля
-    #     return (self.model.objects.annotate(rank=SearchRank(search_vector, search_query)).filter(rank__gte=0.3)) # SearchRank сравнивает запрос пользователя и вектор
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['name'] = self.request.GET.get('q')
-    #     print(context)
-    #     return context
+#TODO: оформить поиск через вектора SearchVector, SearchQuery и т.д.
 
 
 class SectionViewSet(ModelViewSet):

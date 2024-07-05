@@ -7,8 +7,9 @@
 <body>
         <ul>
             {% for presentation in object_list %}
+                
                 <ul>
-                    <a href="{%  url 'presentation_detail' presentation.id %}">{{ presentation.name }}</a>
+                        <a href="{%  url 'presentation_detail' presentation.id %}">{{ presentation.name }}</a>
                 </ul>
             {% endfor %}
         </ul>
