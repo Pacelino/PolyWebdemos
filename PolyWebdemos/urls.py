@@ -54,6 +54,9 @@ urlpatterns = [
 
     path('api/', include(router.urls)),
     path('approx_demo/', views.approx_demo_view, name='approx_demo'),
+    path('presentation/<int:presentation_id>/', views.presentation_detail_view, name='presentation_detail'),
+    path('presentation/<int:presentation_id>/slide/<int:slide_number>/', views.slide_detail, name='slide_detail'),
+
 
 ]
 

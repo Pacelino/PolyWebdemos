@@ -74,6 +74,23 @@ def presentation_detail_view(request, presentation_id):
                   {"presentation": presentation, "slides": slides, "demonstrations": demonstrations})
 
 
+def slide_detail(request, presentation_id, slide_number):
+    presentation = get_object_or_404(Presentation, pk=presentation_id)
+    slide = get_object_or_404(Slide, presentation=presentation, number=slide_number)
+
+    previous_slide_number = slide_number - 1 if slide_number > 1 else 0
+    next_slide_number = slide_number + 1 if Slide.objects.filter(presentation=presentation, number=slide_number + 1).exists() else 1
+
+    context = {
+        'presentation': presentation,
+        'slide': slide,
+        'previous_slide_number': previous_slide_number,
+        'next_slide_number': next_slide_number,
+    }
+
+    return render(request, 'slide_detail.html', context)
+
+
 def section_detail_view(request, section_id):
     section = get_object_or_404(Section, pk=section_id)
     presentations = section.presentation_set.all()

@@ -55,6 +55,7 @@ class Presentation(models.Model):
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING, blank=True)
     courses = models.ManyToManyField(Course, blank=True)
 
+
     def __str__(self):
         return f"{self.name}"
 
