@@ -58,7 +58,8 @@ class PresentationSearchResultView(ListView):
             query = ' '.join(query.split())
 
         object_list = Presentation.objects.filter(
-            Q(name__icontains=query)
+            Q(name__icontains=query) |
+            Q(author__person__name__icontains=query)
         )
         return object_list
     # def get_queryset(self):
