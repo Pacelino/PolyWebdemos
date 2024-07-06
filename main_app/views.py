@@ -118,6 +118,7 @@ def presentation_detail_view(request, presentation_id):
 def slide_detail(request, presentation_id, slide_number):
     presentation = get_object_or_404(Presentation, pk=presentation_id)
     slide = get_object_or_404(Slide, presentation=presentation, number=slide_number)
+    demonstrations = presentation.demo_set.all()
 
     previous_slide_number = slide_number - 1 if slide_number > 1 else 0
     next_slide_number = slide_number + 1 if Slide.objects.filter(presentation=presentation, number=slide_number + 1).exists() else 1
@@ -127,6 +128,7 @@ def slide_detail(request, presentation_id, slide_number):
         'slide': slide,
         'previous_slide_number': previous_slide_number,
         'next_slide_number': next_slide_number,
+        'demonstrations': demonstrations
     }
 
     return render(request, 'slide_detail.html', context)
@@ -218,11 +220,9 @@ def CapacityDistance_G9701_view(request):
 # функция - диспетчер. Позволяет по динамическому demonstration_id распределять демонстрации
 def demo_dispatcher_view(request, demonstration_id, presentation_id):
     presentation = get_object_or_404(Presentation, pk=presentation_id)
-    demonstration = get_object_or_404(Demo, pk=presentation_id)
-
+    demonstration = get_object_or_404(Demo, presentation=presentation)
     if demonstration not in presentation.demo_set.all():
         raise Http404("Demo not found")
-
     if presentation.name == "Normal Distribution":
         if demonstration_id == 1:
             return approx_demo_view(request)

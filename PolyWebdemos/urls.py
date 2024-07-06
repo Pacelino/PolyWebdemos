@@ -54,12 +54,7 @@ urlpatterns = [
 
     path('', views.index, name='index'),
 
-    path('api/', include(router.urls)),
-    path('approx_demo/', views.approx_demo_view, name='approx_demo'),
-    path('presentation/<int:presentation_id>/', views.presentation_detail_view, name='presentation_detail'),
-    path('presentation/<int:presentation_id>/slide/<int:slide_number>/', views.slide_detail, name='slide_detail'),
-
-
+    path('presentations/<int:presentation_id>/slide/<int:slide_number>/', views.slide_detail, name='slide_detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

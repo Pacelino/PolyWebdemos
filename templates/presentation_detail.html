@@ -11,6 +11,14 @@
             <div class="navigation">
                 <a href="{% url 'slide_detail' presentation.id 1 %}" class="btn">Перейти к слайдам</a>
             </div>
+        <div class="navigation">
+            {% if demonstrations %}
+                <h2> Демонстрации </h2>
+                    {% for demonstration in demonstrations %}
+                        <a href="{% url 'demo_dispatcher' presentation.id forloop.counter %}" class="btn">{{ demonstration.name }}</a>  
+                    {% endfor %}
+            {% endif %} 
+        </div>
         </div>
     </div>
 {% endblock content %}

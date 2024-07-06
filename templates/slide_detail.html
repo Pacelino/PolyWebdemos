@@ -8,14 +8,11 @@
             <div class="slide-content">
                 <h2>{{ slide.title }}</h2>
                 <p>{{ slide.content }}</p>
-
             </div>
-
         <div class="navigation">
             {% if previous_slide_number != 0 %}
                 <a href="{% url 'slide_detail' presentation.id previous_slide_number %}" class="btn">Назад</a>
             {% endif %}
-
             {% if next_slide_number != 1 %}
                 <a href="{% url 'slide_detail' presentation.id next_slide_number %}" class="btn">Вперед</a>
             {% endif %}

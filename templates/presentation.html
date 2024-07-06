@@ -9,9 +9,9 @@
 <h3>
     {% for obj in presentation_objects %}
         <ul>
-        <li>
-        <a href="{% url 'presentation_detail' obj.id %}">{{ obj.name }}</a>
-        </li>
+            <li>
+                <a href="{% url 'presentation_detail' obj.id %}">{{ obj.name }}</a>
+            </li>
         </ul>
     {% endfor %}
 </h3>
