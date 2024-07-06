@@ -1,3 +1,5 @@
+from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.search import SearchVectorField
 from django.db import models
 from django.db.models import JSONField
 
@@ -55,6 +57,10 @@ class Presentation(models.Model):
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING, blank=True)
     courses = models.ManyToManyField(Course, blank=True)
 
+    # search_vector = SearchVectorField()
+    #
+    # class Meta:
+    #     indexes = [GinIndex(fields=['search_vector'])]
 
     def __str__(self):
         return f"{self.name}"

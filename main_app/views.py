@@ -1,6 +1,10 @@
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 from rest_framework.viewsets import ModelViewSet
+from django.db.models import Q
+
 
 from SWF.CapacityDistance_G9701_fun import CapacityDistance_fun
 from SWF.approx_demo import approx_demo
@@ -39,10 +43,29 @@ class PresentationViewSet(ModelViewSet):
     queryset = Presentation.objects.all()
     serializer_class = PresentationSerializer
 
+class PresentationSearchResultView(ListView):
+    """View для поиска по презентациям"""
+    model = Presentation
+    template_name = 'presentation_search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            query = ' '.join(query.split())
+
+        object_list = Presentation.objects.filter(
+            Q(name__icontains=query) |
+            Q(author__person__name__icontains=query)
+        )
+        return object_list
+
+    # TODO: оформить поиск через вектора SearchVector, SearchQuery и т.д.
+
 
 class SectionViewSet(ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
+
 
 def index(request):
     sections_set = Section.objects.all()
