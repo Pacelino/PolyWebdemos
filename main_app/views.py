@@ -5,7 +5,6 @@ from django.views.generic import ListView
 from rest_framework.viewsets import ModelViewSet
 from django.db.models import Q
 
-
 from SWF.CapacityDistance_G9701_fun import CapacityDistance_fun
 from SWF.approx_demo import approx_demo
 from main_app.forms import ApproxDemoForm, CapacityDistance_G9701Form
@@ -60,6 +59,25 @@ class PresentationSearchResultView(ListView):
         return object_list
 
     # TODO: оформить поиск через вектора SearchVector, SearchQuery и т.д.
+
+
+class PresentationSearchResultView(ListView):
+    """View для поиска по презентациям"""
+    model = Presentation
+    template_name = 'presentation_search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            query = ' '.join(query.split())
+
+        object_list = Presentation.objects.filter(
+            Q(name__icontains=query) |
+            Q(author__person__name__icontains=query)
+        )
+        return object_list
+
+#TODO: оформить поиск через вектора SearchVector, SearchQuery и т.д.
 
 
 class SectionViewSet(ModelViewSet):
