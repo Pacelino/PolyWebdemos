@@ -1,14 +1,15 @@
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/lecturer/">Lecturer</a></li>
-    <li><a href="/person/">Person</a></li>
-    <li><a href="/course/">Course</a></li>
-    <li><a href="/presentation/">Presentation</a></li>
-    <li><a href="/slide/">Slide</a></li>
-    <div class="search">
+
+{% load static %}
+<ul class="nav">
+    <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+    <li><a href="/lecturer/" class="{% if request.path == '/lecturer/' %}active{% endif %}">Lecturer</a></li>
+    <li><a href="/presentation/" class="{% if request.path == '/presentation/' %}active{% endif %}">Presentation</a></li>
+    <li class="search">
         <form action="{% url 'search' %}" method="get">
             <input type="search" name="q" placeholder="Search Topic">
+            <button type="submit" class="search-btn">
+                <img src="{% static 'images/magnifier.svg' %}" alt="Search Icon" class="search-icon">
+            </button>
         </form>
-    </div>    
+    </li>
 </ul>
-

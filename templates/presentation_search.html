@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 
-    {% block title %} Результат поиска {% endblock %}
+{% block title %}Результаты поиска{% endblock %}
 
 {% block content %}
-<body>
-        <ul>
-            {% for presentation in object_list %}
-                
-                <ul>
-                        <a href="{%  url 'presentation_detail' presentation.id %}">{{ presentation.name }}</a>
-                </ul>
-            {% endfor %}
-        </ul>
-</body>
+<div class="search-results-container">
+    <h2>Результаты поиска</h2>
+    <ul class="presentation-list">
+        {% for presentation in object_list %}
+            <li>
+                <a href="{% url 'presentation_detail' presentation.id %}" class="presentation-item">
+                    <div class="presentation-content">
+                        <h3>{{ presentation.name }}</h3>
+                    </div>
+                </a>
+            </li>
+        {% empty %}
+            <li>Ничего не найдено</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

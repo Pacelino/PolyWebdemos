@@ -21,6 +21,7 @@ class ApproxDemoForm(forms.Form):
     param_type = forms.ChoiceField(choices=PARAM_TYPE_CHOICES)
     var_value = forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput)
     show_pnxi = forms.BooleanField(required=False)
+    var_value = forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput)
     show_pyxim1 = forms.BooleanField(required=False)
     show_pyxip1 = forms.BooleanField(required=False)
     show_pyxi = forms.BooleanField(required=False)

@@ -1,21 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} {{ presentation.name }} {% endblock %}
+
+{% block title %}{{ presentation.name }}{% endblock %}
+
 {% block content %}
-    
-<body>
-    <h1>{{ presentation.name }}</h1>
-    <ul>
-        {% for slide in slides %}
-                <p>{{ slide.content }}</p>
-        {% endfor %}
-    </ul>
-    
-    <ul>
-    <h3>Demonstration:</h3>
-        {% for demonstration in demonstrations %}
-              <a href="{% url 'demo_dispatcher' presentation.id forloop.counter %}">{{ demonstration.name }}</a>  
-        {% endfor %}
-    </ul>
-</body>
-{% endblock %}
+    <div class="presentation-container">
+        <div class="presentation-description">
+            <h2>{{ presentation.name }}</h2>
+            <p>{{ presentation.description }}</p>
+            <div class="navigation">
+                <a href="{% url 'slide_detail' presentation.id 1 %}" class="btn">Перейти к слайдам</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
