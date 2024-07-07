@@ -36,7 +36,7 @@ router.register('slide', views.SlideViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('api/', include(router.urls)),
 
     path('presentation/', views.presentation_view),
     path('presentations/<int:presentation_id>/', views.presentation_detail_view, name='presentation_detail'),

@@ -42,24 +42,6 @@ class PresentationViewSet(ModelViewSet):
     queryset = Presentation.objects.all()
     serializer_class = PresentationSerializer
 
-class PresentationSearchResultView(ListView):
-    """View для поиска по презентациям"""
-    model = Presentation
-    template_name = 'presentation_search.html'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        if query:
-            query = ' '.join(query.split())
-
-        object_list = Presentation.objects.filter(
-            Q(name__icontains=query) |
-            Q(author__person__name__icontains=query)
-        )
-        return object_list
-
-    # TODO: оформить поиск через вектора SearchVector, SearchQuery и т.д.
-
 
 class PresentationSearchResultView(ListView):
     """View для поиска по презентациям"""
