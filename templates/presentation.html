@@ -2,18 +2,27 @@
 {% load static %}
 
 
-{% block title %} <title>Title</title> {% endblock %}
+{% block title %} Presentation {% endblock %}
 
 {% block content %}
+    
 <body>
-<h3>
-    {% for obj in presentation_objects %}
-        <ul>
-            <li>
-                <a href="{% url 'presentation_detail' obj.id %}">{{ obj.name }}</a>
-            </li>
-        </ul>
-    {% endfor %}
-</h3>
+    <div class="search-results-container">
+        <h3>
+            <ul class="presentation-list">
+                {% for obj in presentation_objects %}
+    
+                        <li>
+                            <a href="{% url 'presentation_detail' obj.id %}" class="presentation-item">
+                                <div class="presentation-content">
+                                    {{ obj.name }}
+                                </div>
+                            </a>
+                        </li>
+                    
+                {% endfor %}
+            </ul>
+        </h3>
+    </div>
 </body>
 {% endblock %}
