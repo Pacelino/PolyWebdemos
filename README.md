@@ -7,8 +7,9 @@
 python3.12 -m venv venv
 ```
 Потом появляется папка venv в проекте.
+
 2. Дальше активируем окружение
-mac os или linux
+для mac os или linux
 ```
 source ./venv/bin/activate
 ```
