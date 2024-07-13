@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-gq)^&u)sn#&8@@t$51*67&6&qq5z)67m^$rdz9ljf48%nc$uld
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["dce06072220383.lhr.life"] # '8f199dde011dfb.lhr.life'
+CSRF_TRUSTED_ORIGINS = ['https://*.dce06072220383.lhr.life']
 
 # Application definition
 
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'PolyWebdemos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'webdemos_bd',
+        'NAME': 'webdemos_b',
         'USER': 'postgres',
         'PASSWORD': '1401',
         'HOST': 'localhost',
