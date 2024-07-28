@@ -46,7 +46,7 @@ DATABASES = {
 }
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gq)^&u)sn#&8@@t$51*67&6&qq5z)67m^$rdz9ljf48%nc$uld'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
