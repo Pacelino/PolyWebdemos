@@ -28,12 +28,32 @@ pip install -r requirements.txt
 ```
 чтобы установить все библиотеки в свое окружение.
 
-### Подключение PostgreSQL
-Устанавливаете себе на PostgreSql  (https://www.postgresql.org/)
+### Установка пароля от бд и секретных ключей
+Создайте в папке PolyWebdemos файл `local_settings.py` и вставте в него такой шаблон. Замените значение словаря под свои.
+ В переменной DATABASES хранятся параметры подключения к базе.
+```python
+from .settings import *
+import os
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'имя_базы_данных',
+        'USER': 'имя_пользователя_базы_данных',
+        'PASSWORD': 'пароль_от_базы_данных',
+        'HOST': 'хост (Например: localhost)',
+        'PORT': 'порт_от_базы_данных (по умолчанию 5432)',
+    }
+}
 
-Создайте в ней базу с названием "webdemos_bd"
-В django проекте в файле settings.py есть переменная DATABASES. В ней хранятся параметры подключения к базе (по вашему усмотрению можете все поменять). 
-Напишите в ней своего пользователя (по дефолту postgres) и свой пароль, который написали при скачивании postgreSQL.
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-gq)^&u)sn#&8@@t$51*67&6&qq5z)67m^$rdz9ljf48%nc$uld'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+```
+### Подключение PostgreSQL
+
+Устанавливаете себе [PostgreSql](https://www.postgresql.org/). Посмотрите пункт *Установка пароля от бд и секретных ключей*.
 После подключения проведите миграции:
 ```
 python manage.py migrate
@@ -46,10 +66,10 @@ python manage.py migrate
 ### Тестовый запуск проекта
 Для запуска сервера используйте одну из следующих команд:
 ```
-python manage.py runserver
+python manage.py runserver --settings=PolyWebdemos.local_settings
 ```
 или для linux, mac os 
 ```
-./manage.py runserver
+./manage.py runserver --settings=PolyWebdemos.local_settings
 ```
 Если на экране появилась начальная страница, значит, все работает правильно!
