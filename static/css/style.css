@@ -444,7 +444,7 @@ img {
         align-items: center;
 }
 .wrapper{
-        flex-direction:column
+        flex-direction: column;
         max-width: 1200px;
 }
 
@@ -491,15 +491,6 @@ img {
     text-decoration: none;
     border-radius: 4px;
 }
-
-.navigation .btn:first-child {
-    float: left;
-}
-
-.navigation .btn:last-child {
-    float: right;
-}
-
 
 
 .a-btn {

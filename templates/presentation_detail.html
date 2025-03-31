@@ -15,9 +15,9 @@
             {% if demonstrations %}
                 <h2> Демонстрации </h2>
                     {% for demonstration in demonstrations %}
-                        <a href="{% url 'demo_dispatcher' presentation.id forloop.counter %}" class="btn">{{ demonstration.name }}</a>  
+                        <a href="{% url 'demo_dispatcher' presentation.id forloop.counter %}" class="btn">{{ demonstration.name }}</a>
                     {% endfor %}
-            {% endif %} 
+            {% endif %}
         </div>
         </div>
     </div>

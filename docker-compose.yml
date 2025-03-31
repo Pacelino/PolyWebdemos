@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_NAME=
+      - DB_USER=
+      - DB_PASSWORD=
+      - DB_HOST=db
+    depends_on:
+      - db
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/ # Создаёт именованный том (volume) для постоянного хранения данных PostgreSQL для сохранения данных при перезапуске контейнера
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql # Синхронизирует файл с локального компьютера в контейнер
+    ports:
+      - "5433:5432"
+volumes:
+  postgres_data:

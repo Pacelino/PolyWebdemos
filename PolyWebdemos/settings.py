@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gq)^&u)sn#&8@@t$51*67&6&qq5z)67m^$rdz9ljf48%nc$uld
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["dce06072220383.lhr.life"] # '8f199dde011dfb.lhr.life'
+ALLOWED_HOSTS = ["127.0.0.1"] # '8f199dde011dfb.lhr.life'
 CSRF_TRUSTED_ORIGINS = ['https://*.dce06072220383.lhr.life']
 
 # Application definition
@@ -79,17 +79,26 @@ WSGI_APPLICATION = 'PolyWebdemos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'webdemos_b',
+#         'USER': 'postgres',
+#         'PASSWORD': '1401',
+#         'HOST': 'localhost', # нужно взять из docker-compose
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'webdemos_b',
-        'USER': 'postgres',
-        'PASSWORD': '1401',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'webdemos_b'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '1401'),
+        'HOST': os.getenv('DB_HOST', 'db'),  # Используем имя сервиса из compose
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -125,7 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # settings.py
-import os
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
